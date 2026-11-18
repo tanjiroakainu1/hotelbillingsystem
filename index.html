@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=62" />
+</head>
+<body data-role="public" data-page="home">
+  <div id="app"><div id="main-div" class="public-wrap"></div></div>
+
+  <!-- Page markup (cloned into #main-div by script.js) -->
+  <template id="page-home">
+    <div class="public-home public-home-on-photo">
+      <section class="home-hero home-hero-on-photo">
+        <div class="home-hero-inner">
+          <p class="home-brand-mark">Aurora Grand Hotel</p>
+          <h1>Stay billed with clarity</h1>
+          <p class="home-lead">Rooms, stays, services, transfers, and payments — from check-in to paid invoice.</p>
+          <div class="actions home-cta">
+            <a class="btn btn-teal" href="appointment.html">Request a Room Appointment</a>
+            <a class="btn btn-secondary" href="manage-appointment.html">Manage Appointment</a>
+            <a class="btn btn-primary" href="login.html">Sign In</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel home-section home-glass" style="margin-top:16px;">
+        <div class="home-section-head">
+          <h2>Room Types</h2>
+          <p class="muted">Live types from our inventory — Standard, Deluxe, and Suite with nightly rates.</p>
+        </div>
+        <div class="home-room-grid" id="home-room-types">
+          <p class="muted">Loading room types…</p>
+        </div>
+      </section>
+
+      <section class="panel home-section home-glass">
+        <div class="home-section-head">
+          <h2>Available Rooms</h2>
+          <p class="muted">Rooms open right now. Choose your dates on the appointment form to check availability for your stay.</p>
+        </div>
+        <p><a class="btn btn-primary" href="appointment.html">Check Dates &amp; Request an Appointment</a></p>
+        <div class="home-available-grid" id="home-available-rooms">
+          <p class="muted">Loading available rooms…</p>
+        </div>
+      </section>
+
+      <section class="panel home-section home-glass">
+        <div class="home-section-head">
+          <h2>How the system works</h2>
+          <p class="muted">End-to-end flow matching the hotel billing database: guests, rooms &amp; categories, bookings, transfers, bill items, and payments.</p>
+        </div>
+        <div class="home-flow-grid">
+          <article class="home-flow-step">
+            <span class="home-flow-num">1</span>
+            <h3>Front desk guest registration</h3>
+            <p class="muted">Front desk registers guests into <code>guest_registrations</code> + <code>guests</code> (optional portal login in <code>users</code>). No public self-registration.</p>
+          </article>
+          <article class="home-flow-step">
+            <span class="home-flow-num">2</span>
+            <h3>Rooms by type</h3>
+            <p class="muted">Admin sets room types (Standard / Deluxe / Suite) and room rates. Front desk books an available room for the stay.</p>
+          </article>
+          <article class="home-flow-step">
+            <span class="home-flow-num">3</span>
+            <h3>Check-in &amp; transfers</h3>
+            <p class="muted">Front desk checks guests in. If they upgrade, a <code>room_transfers</code> record posts any rate difference to the bill.</p>
+          </article>
+          <article class="home-flow-step">
+            <span class="home-flow-num">4</span>
+            <h3>Services &amp; extras</h3>
+            <p class="muted">Food, laundry, and guest comfort items (<code>services</code>, <code>additional_item_types</code>) are added as <code>bill_items</code>.</p>
+          </article>
+          <article class="home-flow-step">
+            <span class="home-flow-num">5</span>
+            <h3>Discounts</h3>
+            <p class="muted">Senior Citizen, PWD and Employee discounts apply to the bill. Invoices use the AGH numbering.</p>
+          </article>
+          <article class="home-flow-step">
+            <span class="home-flow-num">6</span>
+            <h3>Pay &amp; review</h3>
+            <p class="muted">Payments are Cash or GCash. Guests view bills and invoices; admin reviews reports and audit logs.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel home-section home-glass">
+        <div class="home-section-head">
+          <h2>Who does what</h2>
+          <p class="muted">Six roles working from one shared stay and billing record.</p>
+        </div>
+        <div class="home-role-grid">
+          <article class="home-role-card home-role-admin">
+            <div class="home-role-top"><h3>Admin</h3><span class="home-role-sub">Setup &amp; oversight</span></div>
+            <p class="muted">Categories, rooms, services, extra items, discounts, all bills, reports, and audit logs.</p>
+          </article>
+          <article class="home-role-card home-role-frontdesk">
+            <div class="home-role-top"><h3>Front Desk</h3><span class="home-role-sub">Daily operations</span></div>
+            <p class="muted">Guests, bookings, check-in/out, room transfers, guest billing, payments, invoices, and outstanding balances.</p>
+          </article>
+          <article class="home-role-card home-role-guest">
+            <div class="home-role-top"><h3>Guest</h3><span class="home-role-sub">Self-service portal</span></div>
+            <p class="muted">View current stay, bill line items, payment history, and invoices.</p>
+          </article>
+          <article class="home-role-card home-role-guest">
+            <div class="home-role-top"><h3>Kitchen</h3><span class="home-role-sub">Food requests</span></div>
+            <p class="muted">Receive food orders automatically and update each request from Preparing to Ready and To be delivered. Guests confirm receipt.</p>
+          </article>
+          <article class="home-role-card home-role-admin">
+            <div class="home-role-top"><h3>Amenities &amp; Laundry Staff</h3><span class="home-role-sub">Assigned guest requests</span></div>
+            <p class="muted">Handle Front Desk-assigned amenities and laundry requests. Guests confirm delivery from their account.</p>
+          </article>
+          <article class="home-role-card home-role-frontdesk">
+            <div class="home-role-top"><h3>Housekeeping</h3><span class="home-role-sub">Checkout inspections</span></div>
+            <p class="muted">Inspect room amenities and linens for damage, stains, or missing items after checkout.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel home-section home-glass">
+        <div class="home-section-head">
+          <h2>Demo Accounts</h2>
+          <p class="muted">One click signs in with a seeded account from the database.</p>
+        </div>
+        <div class="demo-grid" id="demo-cards"></div>
+      </section>
+    </div>
+  </template>
+
+  <script src="assets/js/script.js?v=135"></script>
+</body>
+</html>

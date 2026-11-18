@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Housekeeping Inspections · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="housekeeping" data-page="dashboard">
+  <div id="app"></div>
+  <template id="page-dashboard">
+    <div id="flash"></div>
+    <section class="panel">
+      <h2>My Room Inspections</h2>
+      <p class="muted">Inspect each room item and record whether it is OK, damaged, stained, or missing. Rooms stay in Cleaning until an inspection is completed; any reported issue moves the room to Maintenance.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Room / Guest</th><th>Checkout</th><th>Task / Room Status</th><th>Inspection Checklist</th></tr></thead>
+          <tbody id="housekeeping-tasks"><tr><td colspan="4" class="empty">Loading assigned inspections...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+  <script src="../assets/js/script.js?v=131"></script>
+</body>
+</html>

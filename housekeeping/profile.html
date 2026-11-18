@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="housekeeping" data-page="profile">
+  <div id="app"></div>
+  <template id="page-profile">
+    <div id="flash"></div>
+    <div class="grid grid-2">
+      <section class="panel">
+        <h2>Update Profile</h2>
+        <form id="prof-form" class="form-stack">
+          <div><label for="prof-name">Full Name</label><input id="prof-name" name="full_name" required autocomplete="name"></div>
+          <div><label for="prof-email">Email</label><input id="prof-email" name="email" type="email" required autocomplete="email"></div>
+          <div><label for="prof-phone">Phone</label><input id="prof-phone" name="phone" autocomplete="tel"></div>
+          <div id="prof-gender-wrap" hidden><label for="prof-gender">Gender</label><select id="prof-gender" name="gender"><option value="male">Male</option><option value="female">Female</option></select></div>
+          <button class="btn btn-primary" type="submit">Save Profile</button>
+        </form>
+      </section>
+      <section class="panel">
+        <h2>Change Password</h2>
+        <form id="pw-form" class="form-stack">
+          <div><label for="pw-current">Current Password</label><input id="pw-current" type="password" name="current_password" required autocomplete="current-password"></div>
+          <div><label for="pw-new">New Password</label><input id="pw-new" type="password" name="new_password" required minlength="6" autocomplete="new-password"></div>
+          <div><label for="pw-confirm">Confirm New Password</label><input id="pw-confirm" type="password" name="confirm_password" required autocomplete="new-password"></div>
+          <button class="btn btn-secondary" type="submit">Change Password</button>
+        </form>
+      </section>
+    </div>
+  </template>
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>

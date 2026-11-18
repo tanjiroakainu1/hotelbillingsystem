@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Room Appointment · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=62" />
+</head>
+<body data-role="public" data-page="appointment">
+  <div id="app"><main id="main-div" class="public-wrap"></main></div>
+  <template id="page-appointment">
+    <div class="appointment-public">
+      <header class="row-between appointment-page-head">
+        <div><p class="home-brand-mark">Aurora Grand Hotel</p><h1>Request a Room Appointment</h1>
+          <p class="muted">Choose your stay dates and available rooms. Our team will review and confirm your request.</p></div>
+        <nav class="actions" aria-label="Appointment links">
+          <a class="btn btn-secondary" href="index.html">Back to Home</a>
+          <a class="btn btn-secondary" href="manage-appointment.html">Manage an Appointment</a>
+        </nav>
+      </header>
+      <div id="appointment-alert" aria-live="polite"></div>
+      <section class="panel appointment-panel">
+        <p class="field-hint">This is an appointment request, not a confirmed room booking. Availability is checked again when staff reviews it. A 25% deposit is required and your transfer reference will be reviewed by staff. Save your code privately: it is also the initial password for your guest account. Online appointment accounts require a Gmail address.</p>
+        <form id="public-appointment-form" class="form-stack">
+          <h2>Contact details</h2>
+          <div class="form-grid appointment-grid">
+            <div><label for="appointment-first-name">First name</label><input id="appointment-first-name" name="first_name" maxlength="120" data-appointment-name autocomplete="given-name" required><small class="field-hint" data-appointment-name-error="first_name" hidden>Use letters; spaces, hyphens, apostrophes, and periods are allowed between name parts.</small></div>
+            <div><label for="appointment-last-name">Last name</label><input id="appointment-last-name" name="last_name" maxlength="120" data-appointment-name autocomplete="family-name" required><small class="field-hint" data-appointment-name-error="last_name" hidden>Use letters; spaces, hyphens, apostrophes, and periods are allowed between name parts.</small></div>
+            <div><label for="appointment-email">Gmail address</label><input id="appointment-email" type="email" name="email" maxlength="150" title="Use a Gmail address ending in @gmail.com." placeholder="name@gmail.com" autocomplete="email" required><small class="field-hint">Use an inbox you control ending in @gmail.com. The system checks the Gmail address format but does not independently verify mailbox ownership.</small></div>
+            <div><label for="appointment-phone">Phone</label><input id="appointment-phone" type="tel" name="phone" maxlength="40" autocomplete="tel" required></div>
+          </div>
+          <h2>Stay and room preferences</h2>
+          <p class="field-hint">Hotel policy: check-in is between 3:00 and 3:59 PM, and checkout is fixed at 2:00 PM on a later date. Your appointment is subject to room availability and staff review.</p>
+          <div class="form-grid appointment-grid">
+            <div class="dt-field" data-time-policy="check-in"><label for="appointment-check-in">Check-in date and time</label><div class="dt-row"><input id="appointment-check-in" type="date" name="check_in" required><select data-time-select data-time-policy="check-in" data-default="15:00" name="check_in_time"></select></div></div>
+            <div class="dt-field" data-time-policy="check-out"><label for="appointment-check-out">Check-out date and time</label><div class="dt-row"><input id="appointment-check-out" type="date" name="check_out" required><select data-time-select data-time-policy="check-out" data-default="14:00" name="check_out_time"></select></div></div>
+            <div><label for="appointment-adults">Adults (total)</label><input id="appointment-adults" type="number" name="adults" min="1" max="20" value="1" required></div>
+            <div><label for="appointment-children">Children (total)</label><input id="appointment-children" type="number" name="children" min="0" max="20" value="0" required></div>
+            <input type="hidden" name="room_ids" value="[]">
+            <input type="hidden" name="room_count" value="0">
+            <div class="full"><div class="row-between"><small id="appointment-availability" class="field-hint" data-appointment-availability>Choose dates and confirm the guest counts to see available individual rooms.</small><button class="btn btn-secondary btn-sm" type="button" data-check-appointment-availability>Check room availability</button></div></div>
+            <div class="full"><div id="appointment-room-gallery" class="appointment-room-gallery" data-appointment-room-gallery aria-live="polite"></div></div>
+            <div class="full panel appointment-deposit-panel">
+              <h2>25% advance payment</h2>
+              <p class="field-hint">The estimate uses the selected rooms’ nightly rates and number of nights. Pay this deposit by GCash or bank transfer before submitting. Staff must verify the transfer before confirming your appointment. The remaining 75% and any additional charges are payable later.</p>
+              <p id="appointment-deposit-estimate" aria-live="polite">Select rooms and stay dates to calculate your estimated total and deposit.</p>
+              <div>
+                <span class="field-label">Payment method</span>
+                <div class="appointment-payment-methods">
+                  <label><input type="radio" name="payment_method" value="gcash" checked required> GCash</label>
+                  <label><input type="radio" name="payment_method" value="bank_transfer" required> Bank transfer</label>
+                </div>
+              </div>
+              <div id="appointment-payment-destination" class="gcash-info" aria-live="polite"></div>
+              <div><label for="appointment-payment-reference">Transfer reference number</label><input id="appointment-payment-reference" name="payment_reference" type="text" maxlength="80" autocomplete="off" placeholder="Enter your transfer reference" required><small id="appointment-payment-reference-hint" class="field-hint">Enter the transfer reference exactly as shown on your receipt. Letters, numbers, and symbols are accepted.</small></div>
+            </div>
+            <div class="full"><label for="appointment-notes">Appointment description (optional)</label><textarea id="appointment-notes" name="notes" rows="3" maxlength="2000"></textarea></div>
+          </div>
+          <button class="btn btn-primary" type="submit" disabled>Submit appointment request</button>
+          <small id="appointment-cooldown-status" class="field-hint" role="status">Your entered details are saved in this browser session.</small>
+        </form>
+      </section>
+    </div>
+  </template>
+  <script src="assets/js/script.js?v=142"></script>
+</body>
+</html>

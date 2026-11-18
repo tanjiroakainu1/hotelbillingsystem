@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Appointment · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=61" />
+</head>
+<body data-role="public" data-page="manage-appointment">
+  <div id="app"><main id="main-div" class="public-wrap"></main></div>
+  <template id="page-manage-appointment">
+    <div class="appointment-public">
+      <header class="appointment-page-head">
+        <p class="home-brand-mark">Aurora Grand Hotel</p><h1>Manage Your Appointment</h1>
+        <p class="muted">Look up your request using the appointment code, then request a cancellation or a reschedule. Check-in is between 3:00 and 3:59 PM; checkout is fixed at 2:00 PM. Changes take effect only after staff review.</p>
+        <div class="actions"><a class="btn btn-secondary" href="appointment.html">Back to Appointment Request</a><a class="btn btn-secondary" href="index.html">Home</a></div>
+      </header>
+      <div id="manage-appointment-alert" aria-live="polite"></div>
+      <section class="panel appointment-panel">
+        <form id="appointment-lookup-form" class="form-stack appointment-code-form">
+          <div><label for="appointment-code">16-character appointment code</label><input id="appointment-code" name="appointment_code" minlength="16" maxlength="16" pattern="[A-Fa-f0-9]{16}" autocomplete="off" required><small class="field-hint">Use this page to review your request or send a change for staff review. Give the code to Front Desk to create or link your guest account before check-in.</small></div>
+          <button class="btn btn-primary" type="submit">Find appointment</button>
+        </form>
+      </section>
+      <section id="appointment-details" class="appointment-panel" hidden></section>
+    </div>
+  </template>
+  <script src="assets/js/script.js?v=142"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=61" />
+</head>
+<body data-role="public" data-page="login">
+  <div id="app"><div id="main-div" class="public-wrap"></div></div>
+
+  <!-- Page markup (cloned into #main-div by script.js) -->
+  <template id="page-login">
+    <div class="auth-page auth-page-on-photo">
+      <section class="auth-card auth-card-wide auth-glass">
+        <div class="auth-card-top">
+          <div>
+            <p class="auth-kicker">Aurora Grand Hotel</p>
+            <h1>Sign In</h1>
+            <p class="sub muted">Access your dashboard with your account.</p>
+          </div>
+          <a class="btn btn-secondary btn-home" href="index.html">Home</a>
+        </div>
+        <div id="flash"></div>
+        <form id="login-form" class="form-stack">
+          <div>
+            <label for="login-email">Email</label>
+            <input id="login-email" name="email" type="email" required autocomplete="username">
+          </div>
+          <div>
+            <label for="login-password">Password</label>
+            <input id="login-password" name="password" type="password" required autocomplete="current-password">
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Sign In</button>
+        </form>
+
+        <div class="login-demo-box">
+          <div class="login-demo-head">
+            <strong>Quick demo login</strong>
+            <span class="muted">Choose a seeded role to sign in automatically.</span>
+          </div>
+          <div class="login-demo-actions" id="login-demo-actions"></div>
+        </div>
+
+      </section>
+    </div>
+  </template>
+
+  <script src="assets/js/script.js?v=130"></script>
+</body>
+</html>

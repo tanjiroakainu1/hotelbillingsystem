@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kitchen Requests · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="kitchen" data-page="dashboard">
+  <div id="app"></div>
+  <template id="page-dashboard">
+    <div id="flash"></div>
+    <section class="panel">
+      <h2>Food Requests</h2>
+      <p class="muted">Food orders are routed directly to the Kitchen queue and charged to the guest account when requested. Update each order in sequence: <strong>Preparing</strong>, <strong>Ready</strong>, then <strong>To be delivered</strong>. The guest confirms receipt in their account.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Guest &amp; Room</th><th>Order</th><th>Stay</th><th>Qty</th><th>Notes</th><th>Status</th><th>Update</th></tr></thead>
+          <tbody id="operations-queue-tbody"><tr><td colspan="7" class="empty">Loading kitchen requests...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amenities &amp; Laundry Requests · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="laundry" data-page="dashboard">
+  <div id="app"></div>
+  <template id="page-dashboard">
+    <div id="flash"></div>
+    <section class="panel">
+      <h2>Amenities &amp; Laundry Requests</h2>
+      <p class="muted">Front Desk assigns Amenities and Laundry requests to you. Update each request in sequence: <strong>Preparing</strong>, <strong>Ready</strong>, then <strong>To be delivered</strong>. The guest confirms receipt in their account.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Guest &amp; Room</th><th>Service</th><th>Stay</th><th>Qty</th><th>Notes</th><th>Status</th><th>Update</th></tr></thead>
+          <tbody id="operations-queue-tbody"><tr><td colspan="7" class="empty">Loading laundry requests...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>
