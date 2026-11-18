@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Room Management System · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="admin" data-page="room-types">
+  <div id="app"></div>
+
+  <template id="page-room-types">
+    <div id="flash"></div>
+
+    <section class="panel">
+      <div class="row-between">
+        <h2>Add Room Type</h2>
+        <div class="actions">
+          <a class="btn btn-secondary btn-sm" href="room-management.html">Room Availability &amp; Scheduling</a>
+          <a class="btn btn-teal btn-sm" href="transfers.html">Room Transfer Management System</a>
+        </div>
+      </div>
+      <p class="muted">Create Standard, Deluxe, Suite, or custom types used by room inventory.</p>
+      <form id="rtype-create" class="form-stack rtype-create-form">
+        <div class="form-grid form-2">
+          <div>
+            <label for="rt-name">Name</label>
+            <input id="rt-name" name="name" placeholder="e.g. Deluxe" required>
+          </div>
+          <div>
+            <label for="rt-rate">Base Rate / Night</label>
+            <input id="rt-rate" type="number" step="0.01" name="base_rate" required>
+          </div>
+        </div>
+        <div>
+          <label for="rt-features">Default Room Features</label>
+          <div id="rt-features" data-feature-picker-slot="room_features"></div>
+          <span class="field-hint">Tick the defaults; new rooms copy them when none are chosen.</span>
+        </div>
+        <div>
+          <label for="rt-desc">Description</label>
+          <textarea id="rt-desc" name="description" rows="2" placeholder="Short guest-facing description"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Add Room Type</button>
+      </form>
+    </section>
+
+    <section class="panel" style="margin-top:16px;">
+      <div class="row-between">
+        <h2>Room Management System</h2>
+        <a class="btn btn-secondary btn-sm" href="rooms.html">Room Rates</a>
+      </div>
+      <p class="muted">Types stored in <code>room_types</code> and linked to each room.</p>
+      <div id="rtype-list" class="rtype-grid">
+        <p class="muted">Loading room types…</p>
+      </div>
+      <div id="rtype-pager" class="table-pager" hidden></div>
+    </section>
+  </template>
+
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>

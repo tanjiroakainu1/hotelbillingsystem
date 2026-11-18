@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guest Management · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=62" />
+</head>
+<body data-role="admin" data-page="guests">
+  <div id="app"></div>
+
+  <template id="page-guests">
+    <div id="flash"></div>
+    <section class="panel">
+      <h2>Create account from online appointment</h2>
+      <p class="muted">Enter the 16-character code provided by the guest to review the saved appointment and create or link their portal account. The appointment record remains available for check-in.</p>
+      <form id="guest-appointment-lookup" class="form-grid" style="grid-template-columns:1fr auto;">
+        <input name="appointment_code" minlength="16" maxlength="16" pattern="[A-Fa-f0-9]{16}" autocomplete="off" placeholder="Appointment code" aria-label="Online appointment code" required>
+        <button class="btn btn-secondary" type="submit">Find appointment</button>
+      </form>
+      <div id="guest-appointment-preview" aria-live="polite"></div>
+    </section>
+    <div class="split">
+      <section class="panel">
+        <div class="row-between">
+          <h2>Guests</h2>
+          <button class="btn btn-primary btn-sm" type="button" data-workflow-tab="register">Register Guest</button>
+        </div>
+        <p class="muted">Delete account disables portal sign-in only. Guest profiles, bookings, bills, and request history are retained; deleted accounts can be restored.</p>
+        <form class="form-grid" id="guest-search" style="grid-template-columns:1fr auto;margin-bottom:12px;">
+          <input name="q" placeholder="Search name, email, or phone...">
+          <button class="btn btn-secondary" type="submit">Search</button>
+        </form>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Full Name</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Phone</th><th>Portal</th><th>Actions</th></tr></thead>
+            <tbody id="guests-tbody"><tr><td colspan="7" class="empty">Loading guests...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>Quick register</h2>
+        <p class="muted">Register a basic guest profile or use the Register Guest tab for address and notes.</p>
+        <form id="guest-create" class="form-grid" style="grid-template-columns:1fr;">
+          <div><label>Full Name</label><input name="full_name" required autocomplete="name"></div>
+          <div><label>Email</label><input name="email" type="email" required autocomplete="email"></div>
+          <div><label>Phone</label><input name="phone" required inputmode="numeric" autocomplete="tel"></div>
+          <div>
+            <label>Gender</label>
+            <select name="gender" required><option value="">Select</option><option value="male">Male</option><option value="female">Female</option></select>
+          </div>
+          <div id="quick-guest-password-wrap"><label for="quick-guest-default-password">Default portal password</label><input id="quick-guest-default-password" type="text" readonly autocomplete="off" placeholder="Enter the guest’s full name"><span class="field-hint">The guest’s last name is used as the initial password. Ask them to change it after signing in.</span></div>
+          <label class="check-inline"><input type="checkbox" name="create_login" value="1" checked> Create portal login for this guest</label>
+          <button class="btn btn-primary" type="submit">Register</button>
+        </form>
+      </section>
+    </div>
+  </template>
+
+  <template id="page-register-guest">
+    <div id="flash"></div>
+    <section class="panel">
+      <h2>Create account from online appointment</h2>
+      <p class="muted">Enter the 16-character code provided by the guest to review the saved appointment and create or link their portal account. The appointment record remains available for check-in.</p>
+      <form id="guest-appointment-lookup" class="form-grid" style="grid-template-columns:1fr auto;">
+        <input name="appointment_code" minlength="16" maxlength="16" pattern="[A-Fa-f0-9]{16}" autocomplete="off" placeholder="Appointment code" aria-label="Online appointment code" required>
+        <button class="btn btn-secondary" type="submit">Find appointment</button>
+      </form>
+      <div id="guest-appointment-preview" aria-live="polite"></div>
+    </section>
+    <div class="split">
+      <section class="panel">
+        <div class="row-between">
+          <h2>Registered Guests</h2>
+          <a class="btn btn-secondary btn-sm" href="guests.html?tab=guest-list">Guest list / search</a>
+        </div>
+        <p class="muted">Guests with a portal login can sign in using their email and password.</p>
+        <form class="form-grid" id="guest-reg-search" style="grid-template-columns:1fr auto;margin-bottom:12px;">
+          <input name="q" placeholder="Search name, email, or phone...">
+          <button class="btn btn-secondary" type="submit">Search</button>
+        </form>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Full Name</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Phone</th><th>Portal login</th></tr></thead>
+            <tbody id="guest-reg-tbody"><tr><td colspan="6" class="empty">Loading guests...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>Register Guest Account</h2>
+        <p class="muted">Create a guest profile and optional portal login so they can view bills and invoices.</p>
+        <form id="guest-register-form" class="form-stack">
+          <div><label for="gr-name">Full Name</label><input id="gr-name" name="full_name" required autocomplete="name"></div>
+          <div><label for="gr-email">Email</label><input id="gr-email" name="email" type="email" required autocomplete="email"></div>
+          <div><label for="gr-phone">Phone</label><input id="gr-phone" name="phone" required inputmode="numeric" autocomplete="tel"></div>
+          <div>
+            <label for="gr-gender">Gender</label>
+            <select id="gr-gender" name="gender" required><option value="">Select</option><option value="male">Male</option><option value="female">Female</option></select>
+          </div>
+          <div><label for="gr-address">Address</label><input id="gr-address" name="address" autocomplete="street-address"></div>
+          <div><label for="gr-notes">Notes</label><textarea id="gr-notes" name="notes" rows="2"></textarea></div>
+          <label class="check-inline"><input type="checkbox" name="create_login" value="1" checked id="gr-create-login"> Create portal login (guest can sign in)</label>
+          <div id="gr-password-wrap">
+            <label for="gr-password">Portal Password</label>
+            <input id="gr-password" name="password" type="password" minlength="12" autocomplete="new-password" placeholder="Set a unique password">
+            <span class="field-hint">Use a unique password of at least 12 characters. Do not use the guest's name or email.</span>
+          </div>
+          <button class="btn btn-primary" type="submit">Register Guest</button>
+        </form>
+      </section>
+    </div>
+  </template>
+
+  <script src="../assets/js/script.js?v=137"></script>
+</body>
+</html>

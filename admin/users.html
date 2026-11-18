@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Users & Roles · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="admin" data-page="users">
+  <div id="app"></div>
+
+  <template id="page-users">
+    <div id="flash"></div>
+    <div class="split">
+      <section class="panel">
+        <h2>Users</h2>
+        <p class="muted">Staff and guest portal accounts. Reset passwords from the actions column.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Full Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="users-tbody">
+              <tr><td colspan="8" class="empty">Loading users...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>Create User</h2>
+        <p class="muted">Create accounts for hotel operations and guest access.</p>
+        <form id="user-create" class="form-stack">
+          <div>
+            <label for="uc-name">Full Name</label>
+            <input id="uc-name" name="full_name" required autocomplete="name">
+          </div>
+          <div>
+            <label for="uc-email">Email</label>
+            <input id="uc-email" name="email" type="email" required autocomplete="email">
+          </div>
+          <div>
+            <label for="uc-phone">Phone</label>
+            <input id="uc-phone" name="phone" inputmode="numeric" autocomplete="tel">
+          </div>
+          <div>
+            <label for="uc-role">Role</label>
+            <select id="uc-role" name="role" required>
+              <option value="admin">Admin</option>
+              <option value="frontdesk">Front Desk</option>
+              <option value="guest">Guest</option>
+              <option value="kitchen">Kitchen</option>
+              <option value="laundry">Amenities &amp; Laundry Staff</option>
+              <option value="housekeeping">Housekeeping</option>
+            </select>
+          </div>
+          <div>
+            <label for="uc-password">Password</label>
+            <input id="uc-password" name="password" type="password" required minlength="6" autocomplete="new-password">
+          </div>
+          <button class="btn btn-primary" type="submit">Create User</button>
+        </form>
+      </section>
+    </div>
+  </template>
+
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>

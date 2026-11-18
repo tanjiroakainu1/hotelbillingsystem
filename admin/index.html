@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="admin" data-page="dashboard">
+  <div id="app"></div>
+
+  <template id="page-dashboard">
+    <div id="flash"></div>
+    <div id="admin-stats" class="grid grid-4" style="margin-bottom:16px;">
+      <div class="stat"><div class="label">Users</div><div class="value">·</div></div>
+      <div class="stat"><div class="label">Rooms</div><div class="value">·</div></div>
+      <div class="stat"><div class="label">Revenue</div><div class="value">·</div></div>
+      <div class="stat"><div class="label">Outstanding</div><div class="value">·</div></div>
+    </div>
+    <div class="grid grid-2">
+      <section class="panel">
+        <h2>Recent Bills</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Invoice</th>
+                <th>Guest</th>
+                <th>Total</th>
+                <th>Balance</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="admin-recent-bills-tbody">
+              <tr><td colspan="5" class="empty">Loading recent bills...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>Quick Links</h2>
+        <p class="muted">Common admin tasks and reports.</p>
+        <div class="actions" style="flex-direction:column;align-items:stretch;">
+          <a class="btn btn-primary" href="room-management.html">Room Availability &amp; Stay Extensions</a>
+          <a class="btn btn-secondary" href="users.html">Manage Users</a>
+          <a class="btn btn-secondary" href="rooms.html">Room Rates</a>
+          <a class="btn btn-secondary" href="billing.html">All Billing</a>
+          <a class="btn btn-secondary" href="checkin.html">Check-In / Check-Out</a>
+          <a class="btn btn-teal" href="transfers.html">Room Transfer Management System</a>
+          <a class="btn btn-secondary" href="reports.html">Reports</a>
+        </div>
+      </section>
+    </div>
+  </template>
+
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>

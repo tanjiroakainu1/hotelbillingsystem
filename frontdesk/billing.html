@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guest Accounts &amp; Charges · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="frontdesk" data-page="billing">
+  <div id="app"></div>
+
+  <!-- Page markup (cloned into #main-div by script.js) -->
+  <template id="page-billing">
+    <div id="flash"></div>
+
+    <ol class="flow-steps" id="billing-flow">
+      <li data-step="checkin"><span>1</span><div><strong>Guest Account</strong><small>Select the guest and stay</small></div></li>
+      <li data-step="charges"><span>2</span><div><strong>Add Charges</strong><small>Food, laundry and hotel items</small></div></li>
+      <li data-step="account"><span>3</span><div><strong>Account</strong><small>Review charges and payment</small></div></li>
+    </ol>
+
+    <div id="billing-panel" class="split">
+      <section class="panel">
+        <h2>Guest Accounts</h2>
+        <p class="muted">Select an account to review payment history or add food, laundry and hotel item charges.</p>
+        <div class="table-wrap">
+          <table class="billing-history-table">
+            <thead>
+              <tr>
+                <th>Guest account</th>
+                <th>Rooms</th>
+                <th>Stay dates</th>
+                <th>Total charges</th>
+                <th>Paid</th>
+                <th>Balance</th>
+                <th>Stay / Payment status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="open-bills-tbody">
+              <tr><td colspan="8" class="empty">Loading billing history...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 style="margin-top:16px;">Open Guest Account</h2>
+        <p class="muted">Choose the guest account and, when applicable, the active stay to open its bill.</p>
+        <p class="muted">Choose a guest card to immediately display their active rooms. Select a room card to open its account.</p>
+        <div id="bill-guest-cards" class="billing-account-grid"></div>
+        <section id="bill-room-selection" class="billing-account-rooms hidden">
+          <h3>Active rooms for <span id="bill-selected-guest-name"></span></h3>
+          <div id="bill-account-rooms" class="appointment-room-cards"></div>
+          <p class="muted" id="bill-account-room-empty"></p>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" id="bill-manual-account">Open account without a stay</button>
+          </div>
+        </section>
+        <label class="billing-due-date">Account due date<input type="date" id="bill-due-date"></label>
+      </section>
+
+      <section class="panel" id="bill-workspace">
+        <div class="row-between">
+          <div>
+            <h2 id="bill-title">Select a guest account</h2>
+            <small class="muted" id="bill-created-at"></small>
+          </div>
+          <a class="btn btn-secondary btn-sm hidden" id="bill-back-to-accounts" href="billing.html">All guest accounts</a>
+        </div>
+        <p class="empty" id="bill-empty">Choose an existing account or open one for a guest.</p>
+
+        <div class="stay-card hidden" id="bill-stay"></div>
+        <ul class="kpi-list hidden" id="bill-kpi"></ul>
+
+        <div class="table-wrap hidden" id="bill-items-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="bill-items-tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="hidden" id="bill-charge-forms">
+          <section class="panel billing-room-panel">
+            <h3>Guest rooms &amp; room accounts</h3>
+            <p class="muted" id="bill-delivery-empty">All active rooms are shown. Charges are added only to the selected checked-in room account.</p>
+            <div id="bill-delivery-rooms" class="appointment-room-cards billing-room-chooser"></div>
+          </section>
+          <div class="billing-catalog-toolbar">
+            <div>
+              <strong>Available charges</strong>
+              <small class="muted" id="bill-charge-target-label">Choose a category to browse charges.</small>
+            </div>
+            <input id="bill-catalog-search" type="search" placeholder="Search food, laundry, or items" aria-label="Search charges">
+            <div class="billing-catalog-filters" role="group" aria-label="Filter charges">
+              <button type="button" class="btn btn-secondary btn-sm is-active" data-bill-filter="all">All</button>
+              <button type="button" class="btn btn-secondary btn-sm" data-bill-filter="food">Food</button>
+              <button type="button" class="btn btn-secondary btn-sm" data-bill-filter="laundry">Laundry</button>
+              <button type="button" class="btn btn-secondary btn-sm" data-bill-filter="items">Hotel items</button>
+              <button type="button" class="btn btn-secondary btn-sm" data-bill-filter="discounts">Discounts</button>
+            </div>
+          </div>
+          <section class="panel billing-catalog-section" id="bill-services-panel">
+            <h3>Food &amp; Laundry</h3>
+            <div id="bill-service-cards" class="billing-catalog-grid"></div>
+          </section>
+          <section class="panel billing-catalog-section" id="bill-items-panel">
+            <h3>Hotel Items</h3>
+            <div id="bill-item-cards" class="billing-catalog-grid"></div>
+          </section>
+          <section class="charge-card billing-catalog-section" id="bill-discounts-panel">
+            <h3>Authorized Discount</h3>
+            <p class="muted">Applied to the guest account total.</p>
+            <div id="bill-discount-cards" class="billing-discount-grid"></div>
+          </section>
+        </div>
+
+        <p class="notice-panel hidden" id="bill-locked"></p>
+
+        <div class="actions hidden" id="bill-actions" style="margin-top:12px;">
+          <a class="btn btn-primary" id="bill-pay-link" href="payments.html">Take Payment</a>
+          <a class="btn btn-secondary" id="bill-invoice-link" href="invoices.html">Invoice</a>
+        </div>
+      </section>
+    </div>
+  </template>
+
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>

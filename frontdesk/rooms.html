@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Room Rates · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="frontdesk" data-page="rooms">
+  <div id="app"></div>
+
+  <template id="page-rooms">
+    <div id="flash"></div>
+    <section class="panel notice-panel" style="margin-bottom:16px;">
+      <p class="muted" style="margin:0;"><strong>View only.</strong> Only Admin can change room rates.</p>
+    </section>
+    <section class="panel">
+      <div class="row-between">
+        <h2>Room Rates &amp; Inventory</h2>
+      </div>
+      <p class="muted">Current rooms with photos, rates, and availability.</p>
+      <div class="table-wrap rooms-table-wrap">
+        <table class="rooms-table">
+          <thead>
+            <tr>
+              <th>Room</th>
+              <th>Type &amp; Rate</th>
+              <th>Features</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="rooms-tbody">
+            <tr><td colspan="4" class="empty">Loading rooms...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+
+  <template id="page-services">
+    <div id="flash"></div>
+    <section class="panel">
+      <h2>Service Categories</h2>
+      <p class="muted">The catalog is grouped into these fixed categories. Add and manage individual entries below.</p>
+      <div class="grid grid-3" id="service-category-cards">
+        <div class="stat"><div class="label">Loading categories…</div></div>
+      </div>
+    </section>
+    <section class="panel" id="catalog-form-panel">
+      <h2 id="catalog-form-title">Add Request Item</h2>
+      <p class="muted">Everything guests can request: Food, Laundry, and Items. Add a menu or service entry, set its price, and upload an image guests and assigned staff can see.</p>
+      <form id="catalog-form" class="catalog-form" enctype="multipart/form-data">
+        <input type="hidden" name="id" id="cat-id">
+        <input type="hidden" name="kind" id="cat-kind-hidden">
+        <div><label for="cat-kind">Category</label><select id="cat-kind" required><option value="food">Food</option><option value="laundry">Laundry</option><option value="extra">Items</option></select></div>
+        <div><label for="cat-preset">Quick pick (ready-made)</label><select id="cat-preset"></select></div>
+        <div><label for="cat-name">Name</label><input id="cat-name" name="name" required></div>
+        <div><label for="cat-price">Price</label><input id="cat-price" type="number" step="0.01" min="0" name="price" required></div>
+        <div id="cat-status-wrap" hidden><label for="cat-status">Status</label><select id="cat-status" name="status"><option value="active">Active</option><option value="inactive">Inactive</option></select></div>
+        <div class="catalog-form-wide"><label for="cat-desc">Description</label><textarea id="cat-desc" name="description" rows="2"></textarea></div>
+        <div class="catalog-form-wide catalog-photo-field">
+          <div>
+            <label for="cat-photo">Photo</label>
+            <input id="cat-photo" type="file" name="photo" accept="image/*" class="file-input">
+            <label class="check-inline" id="cat-remove-wrap" hidden><input type="checkbox" name="remove_photo" value="1" id="cat-remove-photo"> Remove current photo</label>
+          </div>
+          <img id="cat-photo-preview" class="catalog-photo-preview" alt="Photo preview" hidden>
+        </div>
+        <div class="catalog-form-wide actions">
+          <button class="btn btn-primary" type="submit" id="cat-save">Add</button>
+          <button class="btn btn-secondary" type="button" id="cat-cancel" hidden>Cancel Edit</button>
+        </div>
+      </form>
+    </section>
+    <section class="panel" style="margin-top:16px;">
+      <h2>Request Items &amp; Services</h2>
+      <p class="muted">Food, laundry and extra items shown to guests when they make a request.</p>
+      <div class="catalog-filters">
+        <select id="svc-filter" aria-label="Filter by category"><option value="all">All</option><option value="food">Food</option><option value="laundry">Laundry</option><option value="extra">Items</option></select>
+        <input id="cat-search" type="search" placeholder="Search by name…" aria-label="Search">
+      </div>
+      <div class="table-wrap">
+        <table class="responsive-table">
+          <thead><tr><th>Photo</th><th>Name</th><th>Category</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="services-tbody"><tr><td colspan="6" class="empty">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+
+  <template id="page-archive">
+    <div id="flash"></div>
+    <section class="panel">
+      <div class="row-between">
+        <div>
+          <h2>Archive Management</h2>
+          <p class="muted" id="archive-access-note">Archived catalog entries are hidden from new guest requests. Existing requests and transaction history remain available for reference.</p>
+        </div>
+        <a class="btn btn-secondary btn-sm" href="rooms.html?tab=services">Hotel Services</a>
+      </div>
+      <div class="table-wrap">
+        <table class="responsive-table">
+          <thead><tr><th>Item</th><th>Category</th><th>Price</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="archive-items-tbody"><tr><td colspan="5" class="empty">Loading archived items…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>

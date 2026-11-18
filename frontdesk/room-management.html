@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Room Availability &amp; Scheduling · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="frontdesk" data-page="room-management">
+  <div id="app"></div>
+
+  <template id="page-room-management">
+    <div id="flash"></div>
+    <section class="panel">
+      <div class="row-between">
+        <div>
+          <h2>Room Availability &amp; Scheduling</h2>
+          <p class="muted">View every room by date, including available rooms, reserved stays, checked-in guests, and maintenance rooms.</p>
+          <label for="room-schedule-date">Stay date</label>
+          <input id="room-schedule-date" type="date">
+        </div>
+        <a class="btn btn-secondary btn-sm" href="rooms.html">Room Inventory</a>
+      </div>
+      <div id="room-status-summary" class="room-status-summary" aria-live="polite"></div>
+      <div id="room-status-filters" class="room-status-filters" role="group" aria-label="Filter rooms by status"></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Room</th><th>Type &amp; Rate</th><th>Guest &amp; Stay</th><th>Room Status</th><th>Action</th></tr>
+          </thead>
+          <tbody id="room-management-tbody">
+            <tr><td colspan="5" class="empty">Loading room status...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+
+  <template id="page-extend-stay">
+    <div id="flash"></div>
+    <section class="panel">
+      <div class="row-between">
+        <div>
+          <h2>Extend Stay · Reopen Check-In</h2>
+          <p class="muted" style="margin:0;">Pick a guest account, choose which rooms to extend and set a future check-out date. Extended stays check out at 2:00 PM; extension charges are added to the guest account, and a checked-out room is reopened.</p>
+        </div>
+        <a class="btn btn-secondary btn-sm" href="checkin.html?tab=checkin">Back to Check-In</a>
+      </div>
+      <div class="extend-pick">
+        <label for="extend-account">Guest account</label>
+        <select id="extend-account"><option value="">Select guest account…</option></select>
+      </div>
+    </section>
+    <section class="panel hidden" id="extend-detail">
+      <div class="row-between">
+        <h2 id="extend-title">Rooms on this account</h2>
+        <a class="btn btn-teal btn-sm" id="extend-bill-link" href="billing.html">Open Guest Account</a>
+      </div>
+      <div class="extend-bulk">
+        <div class="dt-field">
+          <label for="extend-all-at">Same new check-out date for selected rooms (2:00 PM)</label>
+          <input id="extend-all-at" type="date">
+        </div>
+        <button class="btn btn-secondary btn-sm" type="button" id="extend-apply-all">Apply to selected</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="extend-select-all" aria-label="Select all rooms" checked></th>
+              <th>Room</th>
+              <th>Status</th>
+              <th>Current check-out</th>
+              <th>New check-out</th>
+              <th>Extra charge</th>
+            </tr>
+          </thead>
+          <tbody id="extend-rooms-tbody"></tbody>
+        </table>
+      </div>
+      <div class="billing-due" id="extend-total"></div>
+      <div class="actions">
+        <button class="btn btn-primary" type="button" id="extend-submit">Extend Selected Rooms</button>
+      </div>
+    </section>
+    <section class="panel hidden" id="extend-history-panel">
+      <h2>Room Extension History</h2>
+      <p class="muted">Recorded extensions and reopened stays for the selected guest account.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Date Recorded</th><th>Room</th><th>Extension Log</th><th>Recorded By</th></tr>
+          </thead>
+          <tbody id="extend-history-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+
+  <template id="page-transfers">
+    <div id="flash"></div>
+    <div class="split">
+      <section class="panel">
+        <h2>Transfer Guest Room</h2>
+        <p class="muted">Room transfers are scheduled for 3:00 PM within the active stay. A same-day transfer after 3:00 PM is allowed and adds one extra night at the current room rate. The transfer-day rate is prorated to midnight, then the nightly rate difference applies to remaining nights.</p>
+        <form id="transfer-form" class="form-stack">
+          <div>
+            <label for="transfer-stay">Guest stay (account)</label>
+            <select id="transfer-stay"><option value="">Select guest stay…</option></select>
+          </div>
+          <div>
+            <label for="transfer-booking">Room to transfer</label>
+            <select name="booking_id" id="transfer-booking" required><option value="">Select guest stay…</option></select>
+          </div>
+          <div>
+            <label for="transfer-room">New room</label>
+            <select name="to_room_id" id="transfer-room" required><option value="">Select target room…</option></select>
+          </div>
+          <div>
+            <label for="transfer-date">Transfer date &amp; time</label>
+            <div class="dt-field" data-time-policy="transfer">
+              <input id="transfer-date" type="date" name="transfer_date" required>
+              <div id="transfer-time-slot"></div>
+            </div>
+            <p id="transfer-day" class="field-hint"></p>
+            <p id="transfer-stay-info" class="field-hint"></p>
+            <p id="transfer-rate-preview" class="field-hint">Select a booking, transfer date, and target room to preview the rate adjustment.</p>
+          </div>
+          <div>
+            <label for="transfer-reason">Reason</label>
+            <textarea id="transfer-reason" name="reason" rows="3" placeholder="e.g. Upgraded from Standard to Deluxe"></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Transfer Room</button>
+        </form>
+      </section>
+      <section class="panel">
+        <h2>How transfers work</h2>
+        <ul class="kpi-list">
+          <li><span>Eligibility</span><strong>Checked-in stays only</strong></li>
+          <li><span>Target room</span><strong>Must be available</strong></li>
+          <li><span>Bill impact</span><strong>Rate difference × remaining nights</strong></li>
+          <li><span>Audit</span><strong>Logged under room_transfer</strong></li>
+        </ul>
+      </section>
+    </div>
+    <section class="panel" style="margin-top:16px;">
+      <h2>Transfer History</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Guest</th><th>From → To</th><th>Old / New rate</th><th>Nights</th><th>Charge</th><th>Day, date &amp; time</th><th>By</th><th>Reason</th></tr>
+          </thead>
+          <tbody id="transfers-tbody">
+            <tr><td colspan="8" class="empty">Loading transfer history...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>

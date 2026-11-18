@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200" role="img" aria-label="Room photo placeholder">
+  <rect width="320" height="200" fill="#eef1f6"/>
+  <rect x="24" y="24" width="272" height="152" rx="12" fill="#dbe2ea"/>
+  <path d="M72 132h176v20H72z" fill="#c7d9ea"/>
+  <rect x="96" y="72" width="48" height="36" rx="4" fill="#ffffff"/>
+  <rect x="176" y="72" width="48" height="36" rx="4" fill="#ffffff"/>
+  <text x="160" y="118" text-anchor="middle" fill="#64748b" font-family="Segoe UI, sans-serif" font-size="14">No room photo</text>
+</svg>

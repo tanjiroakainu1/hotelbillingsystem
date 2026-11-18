@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reports · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="admin" data-page="reports">
+  <div id="app"></div>
+
+  <template id="page-reports">
+    <div id="flash"></div>
+    <section class="panel">
+      <div class="row-between" style="align-items:flex-end;gap:12px;flex-wrap:wrap;">
+        <form class="form-grid" id="report-filter" style="grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));flex:1;min-width:0;">
+          <div>
+            <label for="report-from">From</label>
+            <input id="report-from" type="date" name="from" required>
+          </div>
+          <div>
+            <label for="report-to">To</label>
+            <input id="report-to" type="date" name="to" required>
+          </div>
+          <div style="display:flex;align-items:flex-end;">
+            <button class="btn btn-primary" type="submit">Apply</button>
+          </div>
+        </form>
+        <div class="actions report-export-actions">
+          <a class="btn btn-secondary" id="export-excel" href="#">Export Excel</a>
+          <a class="btn btn-teal" id="export-pdf" href="#">Export PDF</a>
+        </div>
+      </div>
+      <p class="muted" id="report-period" style="margin:12px 0 0;">Select a date range and click Apply.</p>
+    </section>
+
+    <div id="report-summary">
+      <div class="grid grid-4" style="margin-top:16px;">
+        <div class="stat"><div class="label">Bills</div><div class="value">·</div></div>
+        <div class="stat"><div class="label">Billed</div><div class="value">·</div></div>
+        <div class="stat"><div class="label">Collected</div><div class="value">·</div></div>
+        <div class="stat"><div class="label">Outstanding</div><div class="value">·</div></div>
+      </div>
+      <div class="split" style="margin-top:16px;">
+        <section class="panel">
+          <h2>Bills by Status</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Count</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="report-by-status-tbody">
+                <tr><td colspan="3" class="empty">Loading report...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="panel">
+          <h2>Collections</h2>
+          <ul class="kpi-list" id="report-collections">
+            <li><span>Payments</span><strong>·</strong></li>
+            <li><span>Amount collected</span><strong>·</strong></li>
+            <li><span>Paid on bills</span><strong>·</strong></li>
+          </ul>
+        </section>
+      </div>
+      <div class="split" style="margin-top:16px;">
+        <section class="panel">
+          <h2>Daily Collections</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody id="report-daily-tbody">
+                <tr><td colspan="2" class="empty">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="panel">
+          <h2>Service Revenue</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Service / Item</th>
+                  <th>Revenue</th>
+                </tr>
+              </thead>
+              <tbody id="report-services-tbody">
+                <tr><td colspan="2" class="empty">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="chart-grid" id="report-charts">
+      <section class="panel chart-card chart-wide"><h2>Revenue Trend <small>collected per day</small></h2><div class="chart" id="ch-daily"></div></section>
+      <section class="panel chart-card"><h2>Billed vs Collected <small>last 6 months</small></h2><div class="chart" id="ch-monthly"></div></section>
+      <section class="panel chart-card"><h2>Payment Methods</h2><div class="chart" id="ch-methods"></div></section>
+      <section class="panel chart-card"><h2>Bills by Status</h2><div class="chart" id="ch-status"></div></section>
+      <section class="panel chart-card"><h2>Revenue by Charge Type</h2><div class="chart" id="ch-types"></div></section>
+      <section class="panel chart-card"><h2>Top Services &amp; Items</h2><div class="chart" id="ch-services"></div></section>
+      <section class="panel chart-card"><h2>Collections by Weekday</h2><div class="chart" id="ch-weekday"></div></section>
+      <section class="panel chart-card"><h2>Room Status Now</h2><div class="chart" id="ch-rooms"></div></section>
+      <section class="panel chart-card"><h2>Stays by Room Type</h2><div class="chart" id="ch-roomtypes"></div></section>
+      <section class="panel chart-card"><h2>Bookings by Status</h2><div class="chart" id="ch-bookings"></div></section>
+      <section class="panel chart-card"><h2>Guest Requests by Type</h2><div class="chart" id="ch-reqtypes"></div></section>
+      <section class="panel chart-card"><h2>Guest Requests by Status</h2><div class="chart" id="ch-reqstatus"></div></section>
+      <section class="panel chart-card"><h2>Top Guests by Billing</h2><div class="chart" id="ch-guests"></div></section>
+      <section class="panel chart-card"><h2>Collection Rate</h2><div class="chart" id="ch-rate"></div></section>
+    </div>
+
+  </template>
+
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>

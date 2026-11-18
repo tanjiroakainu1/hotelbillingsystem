@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting to Guest Requests &amp; Items</title>
+  <script>
+    const destination = new URL('requested-items.html', window.location.href);
+    destination.search = window.location.search;
+    destination.hash = window.location.hash;
+    window.location.replace(destination.href);
+  </script>
+</head>
+<body>
+  <p>Guest Requests and Items are now combined. <a href="requested-items.html">Continue</a>.</p>
+</body>
+</html>

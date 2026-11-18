@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Check-In / Check-Out · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="frontdesk" data-page="stay-management">
+  <div id="app"></div>
+
+  <!-- Page markup (cloned into #main-div by script.js) -->
+  <template id="page-checkin">
+    <div id="flash"></div>
+    <div class="split">
+      <section class="panel">
+        <div class="row-between">
+          <h2>Ready for Check-In</h2>
+          <div class="actions">
+            <a class="btn btn-teal btn-sm" href="checkin.html?tab=appointments">Room Appointments</a>
+            <a class="btn btn-secondary btn-sm" href="room-management.html">Room Availability &amp; Stay Extensions</a>
+            <a class="btn btn-secondary btn-sm" href="room-management.html?tab=extend-stay">Extend Stay</a>
+            <a class="btn btn-teal btn-sm" href="transfers.html">Room Transfer Management System</a>
+          </div>
+        </div>
+        <p class="muted">Reserved stays waiting to be checked in. Use the form to check in a new guest.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Guest</th>
+                <th>Room</th>
+                <th>Dates</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="checkin-tbody">
+              <tr><td colspan="5" class="empty">Loading reserved bookings...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>Guest Check-In</h2>
+        <p class="muted">Hotel policy: check-in is scheduled between 3:00 and 3:59 PM; check-out is fixed at 2:00 PM on a later date. A late checkout attempt adds one full night to the guest account. Staff may check in an arriving guest earlier for role-play and system testing.</p>
+        <form id="appointment-checkin-lookup" class="form-stack">
+          <div>
+            <label for="frontdesk-appointment-code">Online appointment code</label>
+            <div class="actions">
+              <input id="frontdesk-appointment-code" name="appointment_code" minlength="16" maxlength="16" pattern="[A-Fa-f0-9]{16}" autocomplete="off" required>
+              <button class="btn btn-secondary" type="submit">Load appointment code to view data</button>
+            </div>
+            <small class="field-hint">Load the saved guest, stay dates, and every room booked with this code. The account is created or linked during lookup; the appointment and deposit must be confirmed before check-in.</small>
+          </div>
+          <div id="appointment-checkin-result" aria-live="polite"></div>
+        </form>
+        <form id="booking-create" class="form-stack">
+          <input type="hidden" name="appointment_id" id="checkin-appointment-id" value="">
+          <div>
+            <label for="booking-guest-select">Guest / Portal User</label>
+            <select id="booking-guest-select" name="guest_id" required>
+              <option value="">Select guest…</option>
+            </select>
+          </div>
+          <div class="dt-field" data-time-policy="check-in">
+            <label for="check-in-at">Check-In date and time</label>
+            <div class="dt-row"><input id="check-in-at" type="date" name="check_in" required><select data-time-select data-time-policy="check-in" data-default="15:00" name="check_in_time"></select></div>
+            <span class="field-hint" id="check-in-hint">Choose a time from 3:00 to 3:59 PM.</span>
+          </div>
+          <div class="dt-field" data-time-policy="check-out">
+            <label for="check-out-at">Check-Out date and time</label>
+            <div class="dt-row"><input id="check-out-at" type="date" name="check_out" required><select data-time-select data-time-policy="check-out" data-default="14:00" name="check_out_time"></select></div>
+            <span class="field-hint" id="check-out-hint">Checkout is fixed at 2:00 PM, at least the day after check-in.</span>
+          </div>          <div class="guest-rooms-box">
+            <div class="stepper-row">
+              <div class="stepper-field"><span class="dt-label">Adults</span>
+                <div class="stepper" data-stepper="adults"><button type="button" class="btn btn-secondary btn-sm" data-step="-1" aria-label="Fewer adults">&minus;</button><output id="guest-adults">1</output><button type="button" class="btn btn-secondary btn-sm" data-step="1" aria-label="More adults">+</button></div></div>
+              <div class="stepper-field"><span class="dt-label">Children</span>
+                <div class="stepper" data-stepper="children"><button type="button" class="btn btn-secondary btn-sm" data-step="-1" aria-label="Fewer children">&minus;</button><output id="guest-children">0</output><button type="button" class="btn btn-secondary btn-sm" data-step="1" aria-label="More children">+</button></div></div>
+              <div class="stepper-field"><span class="dt-label">Rooms</span>
+                <div class="stepper" data-stepper="rooms"><button type="button" class="btn btn-secondary btn-sm" data-step="-1" aria-label="Fewer rooms">&minus;</button><output id="guest-rooms">1</output><button type="button" class="btn btn-secondary btn-sm" data-step="1" aria-label="More rooms">+</button></div></div>
+            </div>
+            <div id="room-slots" class="room-slots"><p class="muted">Choose valid stay dates first.</p></div>
+            <div id="capacity-note" class="capacity-note"></div>
+          </div>          <div><label>Notes</label><textarea name="notes" rows="2"></textarea></div>
+          <div class="billing-box" id="billing-box">
+            <div class="billing-summary" id="billing-summary">Select a room and dates to see the bill.</div>
+            <div>
+              <label for="billing-discount">Discount</label>
+              <select id="billing-discount" name="discount_id"><option value="">No discount</option></select>
+            </div>
+            <div id="discount-eligibility-wrap" hidden>
+              <p class="field-hint" id="discount-eligibility-details"></p>
+              <label class="check-inline"><input id="discount-eligibility-confirmed" type="checkbox" name="discount_eligibility_confirmed" value="1"> I verified the guest meets this discount's requirements and checked any required supporting ID.</label>
+            </div>
+            <div>
+              <label for="billing-type">Billing type</label>
+              <select id="billing-type" name="billing_type" required>
+                <option value="full">Full payment (100%)</option>
+                <option value="half">Half payment (50%)</option>
+                <option value="partial">Partial payment (custom amount)</option>
+              </select>
+            </div>
+            <div id="partial-wrap" hidden>
+              <label for="partial-amount">Partial amount</label>
+              <input id="partial-amount" type="number" name="partial_amount" min="1" step="0.01">
+            </div>
+            <div>
+              <label for="billing-method">Payment method</label>
+              <select id="billing-method" name="method">
+                <option value="cash">Cash (at the counter)</option>
+                <option value="gcash">GCash</option>
+                <option value="bank_transfer">Bank transfer</option>
+              </select>
+            </div>
+            <div id="billing-payment-destination" class="gcash-info" hidden></div>
+            <div id="gcash-wrap" hidden>
+              <label for="billing-ref" id="billing-ref-label">Transfer reference number (required)</label>
+              <input id="billing-ref" name="reference_no" placeholder="Enter the transfer reference" autocomplete="off">
+            </div>
+            <div class="billing-due" id="billing-due"></div>
+          </div>
+          <button class="btn btn-primary" type="submit">Check In &amp; Pay</button>
+        </form>
+      </section>
+    </div>
+
+    <section class="panel">
+      <div class="row-between">
+        <h2>In-House Guests · Guest Accounts</h2>
+        <a class="btn btn-teal btn-sm" href="billing.html">Guest Billing History</a>
+      </div>
+      <p class="muted">Checking in opens the guest account with room charges. Add food, laundry and amenity charges to the correct stay from here.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Guest</th>
+              <th>Room</th>
+              <th>Stay</th>
+              <th>Account</th>
+              <th>Total</th>
+              <th>Balance</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="inhouse-tbody">
+            <tr><td colspan="7" class="empty">Loading in-house guests...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+
+  <template id="page-appointments">
+    <div id="appointments-alert" aria-live="polite"></div>
+    <section class="panel">
+      <div class="row-between">
+        <div>
+          <h2>Online Appointment Requests</h2>
+          <p class="muted">Review public appointment details and confirm or reject requests. Confirmations remain subject to room availability.</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Guest / Contact</th><th>Stay / Room</th><th>Guests</th><th>Status</th><th>Requested</th><th>Review</th></tr></thead>
+          <tbody id="appointment-requests-body"><tr><td colspan="6" class="empty">Loading appointment requests…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>Appointment Change Requests &amp; History</h2>
+      <p class="muted">Review cancellation and reschedule requests. This section also keeps each previous appointment, requested change, decision, and reviewer visible.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Guest / Code</th><th>Previous appointment</th><th>Requested change</th><th>Status</th><th>Review</th></tr></thead>
+          <tbody id="appointment-changes-body"><tr><td colspan="5" class="empty">Loading appointment history…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+
+  <template id="page-checkout">
+    <div id="flash"></div>
+    <section class="panel">
+      <div class="row-between">
+        <h2>Ready for Check-Out</h2>
+        <div class="actions">
+          <a class="btn btn-secondary btn-sm" href="room-management.html">Room Availability &amp; Stay Extensions</a>
+          <a class="btn btn-teal btn-sm" href="transfers.html">Room Transfer Management System</a>
+        </div>
+      </div>
+      <p class="muted">Checked-in guests. Any outstanding balance across the guest's linked room bills must be paid before check-out.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Guest</th>
+              <th>Room</th>
+              <th>Stay dates</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="checkout-tbody">
+            <tr><td colspan="5" class="empty">Loading checked-in guests...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+
+  <script src="../assets/js/script.js?v=135"></script>
+</body>
+</html>

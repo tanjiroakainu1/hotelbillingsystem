@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting to Request Assignments &amp; Room Inspections</title>
+  <script>
+    const destination = new URL('operations.html', window.location.href);
+    new URLSearchParams(window.location.search).forEach((value, key) => destination.searchParams.set(key, value));
+    destination.searchParams.set('tab', 'requests');
+    destination.hash = window.location.hash;
+    window.location.replace(destination.href);
+  </script>
+</head>
+<body>
+  <p>Guest request assignments are part of <a href="operations.html?tab=requests">Request Assignments &amp; Room Inspections</a>.</p>
+</body>
+</html>

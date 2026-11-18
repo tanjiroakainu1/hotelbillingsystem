@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Front Desk · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="frontdesk" data-page="dashboard">
+  <div id="app"></div>
+
+  <!-- Page markup (cloned into #main-div by script.js) -->
+  <template id="page-dashboard">
+    <div id="flash"></div>
+    <div class="grid grid-4" style="margin-bottom:16px;">
+      <div class="stat"><div class="label">Checked In</div><div class="value" id="fd-stat-checked-in">·</div></div>
+      <div class="stat"><div class="label">Reserved</div><div class="value" id="fd-stat-reserved">·</div></div>
+      <div class="stat"><div class="label">Open Bills</div><div class="value" id="fd-stat-pending-bills">·</div></div>
+      <div class="stat"><div class="label">Today's Collections</div><div class="value" id="fd-stat-today-pay">·</div></div>
+    </div>
+    <div class="grid grid-2">
+      <section class="panel">
+        <h2>Active Stays</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Guest</th>
+                <th>Room</th>
+                <th>Dates</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="fd-stays-tbody">
+              <tr><td colspan="4" class="empty">Loading active stays...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>Quick Actions</h2>
+        <div class="actions" style="flex-direction:column;align-items:stretch;">
+          <a class="btn btn-primary" href="room-management.html">Room Availability &amp; Stay Extensions</a>
+          <a class="btn btn-teal" href="checkin.html">Check-In / Check-Out</a>
+          <a class="btn btn-secondary" href="transfers.html">Room Transfer Management System</a>
+          <a class="btn btn-secondary" href="register-guest.html">Register Guest Account</a>
+          <a class="btn btn-secondary" href="guests.html">Guest List</a>
+          <a class="btn btn-secondary" href="billing.html">Create / Manage Bill</a>
+          <a class="btn btn-secondary" href="payments.html">Process Payment</a>
+          <a class="btn btn-secondary" href="reports.html">Reports &amp; Exports</a>
+        </div>
+      </section>
+    </div>
+  </template>
+
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>

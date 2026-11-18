@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting to Payments &amp; Invoices</title>
+  <script>
+    const destination = new URL('payments.html', window.location.href);
+    new URLSearchParams(window.location.search).forEach((value, key) => destination.searchParams.set(key, value));
+    destination.searchParams.set('tab', 'invoices');
+    destination.hash = window.location.hash;
+    window.location.replace(destination.href);
+  </script>
+</head>
+<body><p>Invoices are now part of Payments &amp; Invoices. <a href="payments.html?tab=invoices">Continue to Invoices</a>.</p></body>
+</html>

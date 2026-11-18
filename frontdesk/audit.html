@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Audit Logs · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="frontdesk" data-page="audit">
+  <div id="app"></div>
+
+  <!-- Page markup (cloned into #main-div by script.js) -->
+  <template id="page-audit">
+    <div id="flash"></div>
+    <section class="panel">
+      <h2>Audit Logs</h2>
+      <p class="muted">Every action in the system, showing who did it and their role (admin, front desk, kitchen, laundry, delivery, guest).</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>When</th>
+              <th>Done By</th>
+              <th>Role</th>
+              <th>Action</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody id="audit-tbody">
+            <tr><td colspan="5" class="empty">Loading audit logs...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>

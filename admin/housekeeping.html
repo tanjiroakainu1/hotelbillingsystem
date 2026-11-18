@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request Assignments &amp; Room Inspections · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="admin" data-page="housekeeping">
+  <div id="app"></div>
+  <template id="page-requested-items">
+    <div id="flash"></div>
+    <section class="panel">
+      <h2>Guest Request Assignments</h2>
+      <p class="muted">Assign pending Amenities and Laundry requests to an active Amenities &amp; Laundry Staff member. Food requests go directly to the Kitchen queue. Follow each request through Preparing, Ready, To be delivered, and guest-confirmed Delivered.</p>
+      <div id="req-summary" class="req-summary"></div>
+      <div class="req-filters">
+        <div>
+          <label for="req-filter-type">Type</label>
+          <select id="req-filter-type">
+            <option value="">All types</option>
+            <option value="extra">Amenities</option>
+            <option value="food">Food</option>
+            <option value="laundry">Laundry</option>
+          </select>
+        </div>
+        <div>
+          <label for="req-filter-status">Status</label>
+          <select id="req-filter-status">
+            <option value="">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="preparing">Preparing</option>
+            <option value="ready">Ready</option>
+            <option value="to_be_delivered">To be delivered</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div>
+          <label for="req-filter-q">Search guest / item / room</label>
+          <input id="req-filter-q" type="search" placeholder="Type to search…">
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Requested</th><th>Guest / Room</th><th>Item</th><th>Qty</th><th>Amount</th><th>Status</th><th>Assignment / Handler</th><th>Last Update</th></tr>
+          </thead>
+          <tbody id="requested-items-tbody">
+            <tr><td colspan="8" class="empty">Loading guest requests...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+
+  <template id="page-housekeeping">
+    <div id="flash"></div>
+    <section class="panel">
+      <h2>Checkout Room Inspections</h2>
+      <p class="muted">Checkout automatically queues a room inspection. Assign it to active Housekeeping staff and review the room-item checklist for damage, stains, or missing items. Rooms remain in Cleaning until inspection is complete.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Room / Task</th><th>Guest / Checkout</th><th>Task / Room Status</th><th>Housekeeping Assignment</th><th>Damage, Stains &amp; Checklist</th></tr></thead>
+          <tbody id="housekeeping-management-tbody"><tr><td colspan="5" class="empty">Loading checkout inspections...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>

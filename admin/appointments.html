@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Room Appointments · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="admin" data-page="appointments">
+  <div id="app"></div>
+  <template id="page-appointments">
+    <div id="appointments-alert" aria-live="polite"></div>
+    <section class="panel">
+      <div class="row-between"><div><h2>Online Appointment Requests</h2><p class="muted">Verify the 25% GCash or bank transfer deposit before confirming an appointment. Confirmations remain subject to room availability.</p></div>
+        <a class="btn btn-secondary" href="../appointment.html" target="_blank" rel="noopener">Open public request form</a></div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Guest / Contact</th><th>Stay / Room</th><th>Guests</th><th>Deposit / Verification</th><th>Status</th><th>Requested</th><th>Review</th></tr></thead>
+          <tbody id="appointment-requests-body"><tr><td colspan="7" class="empty">Loading appointment requests…</td></tr></tbody></table>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>Appointment Change Requests &amp; History</h2>
+      <p class="muted">Review cancellation and reschedule requests. This section also keeps each previous appointment, requested change, decision, and reviewer visible.</p>
+      <div class="table-wrap">
+        <table><thead><tr><th>Guest / Code</th><th>Current appointment</th><th>Requested change</th><th>Status</th><th>Review</th></tr></thead>
+          <tbody id="appointment-changes-body"><tr><td colspan="5" class="empty">Loading change requests…</td></tr></tbody></table>
+      </div>
+    </section>
+  </template>
+  <script src="../assets/js/script.js?v=142"></script>
+</body>
+</html>

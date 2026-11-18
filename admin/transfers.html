@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting to Room Management</title>
+  <script>
+    const destination = new URL('room-management.html', window.location.href);
+    new URLSearchParams(window.location.search).forEach((value, key) => destination.searchParams.set(key, value));
+    destination.searchParams.set('tab', 'transfers');
+    destination.hash = window.location.hash;
+    window.location.replace(destination.href);
+  </script>
+</head>
+<body><p>Room transfers are now part of Room Management. <a href="room-management.html?tab=transfers">Continue to Transfers</a>.</p></body>
+</html>

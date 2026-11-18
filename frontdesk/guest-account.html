@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guest Account · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="frontdesk" data-page="guest-account">
+  <div id="app"></div>
+
+  <template id="page-guest-account">
+    <div id="flash"></div>
+    <section class="panel">
+      <div class="row-between">
+        <div>
+          <h2 id="account-guest-name">Guest Account</h2>
+          <p class="muted" id="account-guest-contact"></p>
+        </div>
+        <a class="btn btn-secondary btn-sm" href="billing.html">Back to Guest Billing</a>
+      </div>
+      <ul class="kpi-list" id="account-kpis"></ul>
+    </section>
+
+    <section class="panel" id="account-payment-panel">
+      <div class="row-between">
+        <div>
+          <h2>Pay Guest Account</h2>
+          <p class="muted">A payment is allocated proportionally across the outstanding balances of all rooms on this account.</p>
+        </div>
+        <button class="btn btn-teal" type="button" id="account-pay-full">Pay Full Balance</button>
+      </div>
+      <form id="account-payment-form" class="form-grid">
+        <input type="hidden" name="booking_id" id="account-payment-booking-id">
+        <input type="hidden" name="bill_id" id="account-payment-bill-id">
+        <div>
+          <label for="account-payment-amount">Payment amount</label>
+          <input type="number" name="amount" id="account-payment-amount" min="0.01" step="0.01" required>
+        </div>
+        <div>
+          <label for="account-payment-method">Payment method</label>
+          <select name="method" id="account-payment-method" required>
+            <option value="cash">Cash (at the counter)</option>
+            <option value="gcash">GCash</option>
+            <option value="bank_transfer">Bank transfer</option>
+          </select>
+        </div>
+        <div id="account-payment-destination" class="gcash-info hidden"></div>
+        <div id="account-payment-reference-wrap" hidden>
+          <label for="account-payment-reference" id="account-payment-reference-label">Transfer reference number (required)</label>
+          <input type="text" name="reference_no" id="account-payment-reference" autocomplete="off">
+        </div>
+        <div>
+          <label for="account-payment-notes">Payment note (optional)</label>
+          <input type="text" name="notes" id="account-payment-notes">
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit" id="account-payment-submit">Record &amp; Distribute Payment</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="row-between">
+        <div>
+          <h2>Rooms on This Account</h2>
+          <p class="muted" id="account-room-summary"></p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Room / Stay</th>
+              <th>Guest Account</th>
+              <th>Full Charges</th>
+              <th>Paid</th>
+              <th>Balance</th>
+              <th>Payment Status</th>
+              <th>Requested Services</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="account-rooms-tbody">
+            <tr><td colspan="8" class="empty">Loading guest account…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="row-between">
+        <div>
+          <h2>Stay Changes</h2>
+          <p class="muted">Room extensions and room transfers for the stays on this account.</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Date &amp; Time</th><th>Change</th><th>Room</th><th>Details</th><th>Updated By</th></tr>
+          </thead>
+          <tbody id="account-stay-changes-tbody">
+            <tr><td colspan="5" class="empty">Loading stay changes…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="row-between">
+        <div>
+          <h2>Payment History</h2>
+          <p class="muted" id="account-payment-history-summary">Payments recorded for all rooms on this account. Export a PDF copy of any receipt.</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date &amp; Time</th>
+              <th>Room / Bill</th>
+              <th>Amount</th>
+              <th>Method / Reference</th>
+              <th>Received By / Note</th>
+              <th>Receipt</th>
+            </tr>
+          </thead>
+          <tbody id="account-payment-history-tbody">
+            <tr><td colspan="6" class="empty">Loading payment history…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guest Requests &amp; Items · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="admin" data-page="requested-items">
+  <div id="app"></div>
+
+  <template id="page-requested-items">
+    <div id="flash"></div>
+    <section class="panel">
+      <h2>Guest Requests</h2>
+      <p class="muted">Review Food, Amenities, and Laundry requests and assign pending Amenities and Laundry work to active staff. Food requests are routed to Kitchen. Guests confirm receipt or report an item not delivered from their account.</p>
+      <div id="req-summary" class="req-summary"></div>
+      <div class="req-filters">
+        <div>
+          <label for="req-filter-type">Type</label>
+          <select id="req-filter-type">
+            <option value="">All types</option>
+            <option value="extra">Amenities</option>
+            <option value="food">Food</option>
+            <option value="laundry">Laundry</option>
+          </select>
+        </div>
+        <div>
+          <label for="req-filter-status">Status</label>
+          <select id="req-filter-status">
+            <option value="">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="preparing">Preparing</option>
+            <option value="ready">Ready</option>
+            <option value="to_be_delivered">To be delivered</option>
+            <option value="delivered">Delivered</option>
+            <option value="not_delivered">Not delivered</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div>
+          <label for="req-filter-q">Search guest / item / room</label>
+          <input id="req-filter-q" type="search" placeholder="Type to search…">
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Requested</th>
+              <th>Guest / Room</th>
+              <th>Item</th>
+              <th>Qty</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Assignment / Handler</th>
+              <th>Last Update</th>
+            </tr>
+          </thead>
+          <tbody id="requested-items-tbody">
+            <tr><td colspan="8" class="empty">Loading requested items...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="panel" id="item-catalog-panel" style="margin-top:16px;">
+      <h2>Items Catalog</h2>
+      <p class="muted">Manage the additional items guests can request.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item</th><th>Price</th><th>Status</th><th>Edit / Delete</th></tr></thead>
+          <tbody id="item-catalog-tbody"><tr><td colspan="4" class="empty">Loading catalog…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+    <section class="panel" id="item-create-panel" style="margin-top:16px;">
+      <h2>Add Extra Item</h2>
+      <form id="item-create" class="form-stack">
+        <div><label for="item-name">Item Name</label><input id="item-name" name="item_name" placeholder="e.g. Extra Pillow" required></div>
+        <div><label for="item-price">Unit Price</label><input id="item-price" type="number" step="0.01" min="0" name="unit_price" required></div>
+        <div><label for="item-desc">Description</label><textarea id="item-desc" name="description" rows="3"></textarea></div>
+        <button class="btn btn-primary" type="submit">Add Item</button>
+      </form>
+    </section>
+  </template>
+
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>

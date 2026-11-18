@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guest Account · Aurora Grand Hotel</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=61" />
+</head>
+<body data-role="guest" data-page="bill">
+  <div id="app"></div>
+
+  <!-- Page markup (cloned into #main-div by script.js) -->
+  <template id="page-bill">
+    <div id="flash"></div>
+    <section class="panel">
+      <div class="row-between">
+        <div>
+          <h2>Guest Account · Linked Rooms</h2>
+          <p class="muted">All stays on your guest account are listed below, with the requests delivered to each room.</p>
+        </div>
+        <strong id="guest-account-balance"></strong>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Room / Stay</th><th>Invoice</th><th>Charges</th><th>Paid</th><th>Balance</th><th>Status</th><th>Requested Services</th></tr>
+          </thead>
+          <tbody id="guest-account-rooms">
+            <tr><td colspan="7" class="empty">Loading guest account...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Stay Changes</h2>
+      <p class="muted">Check-out extensions and room transfers for the rooms linked to this account.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Date &amp; Time</th><th>Change</th><th>Room</th><th>Details</th><th>Updated By</th></tr>
+          </thead>
+          <tbody id="guest-account-stay-changes">
+            <tr><td colspan="5" class="empty">Loading stay changes...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Current Invoice Details</h2>
+      <div id="guest-bill-summary">
+        <p class="muted">Loading bill...</p>
+      </div>
+      <h3>Room Charges</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="guest-bill-room-tbody">
+            <tr><td colspan="2" class="empty">Loading room charges...</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Services</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="guest-bill-service-tbody">
+            <tr><td colspan="2" class="empty">Loading services...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+
+  <script src="../assets/js/script.js?v=130"></script>
+</body>
+</html>
